@@ -5,6 +5,7 @@ import static org.jcodec.common.Fourcc.ftyp;
 import static org.jcodec.common.Fourcc.mdat;
 import static org.jcodec.common.Fourcc.moov;
 import static org.jcodec.common.Fourcc.wide;
+import static org.jcodec.common.Fourcc.skip;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -190,7 +191,7 @@ public class MP4Demuxer implements Demuxer {
             } else if (len < 8)
                 break;
             if (fcc == ftyp && len < 64 || fcc == moov && len < 100 * 1024 * 1024 || fcc == free || fcc == mdat
-                    || fcc == wide)
+                    || fcc == wide || fcc == skip && total > 1)
                 success++;
             total++;
             if (len >= Integer.MAX_VALUE)

@@ -21,5 +21,6 @@ public class Fourcc {
     public static final int moov = intFourcc("moov");
     public static final int mdat = intFourcc("mdat");
     public static final int wide = intFourcc("wide");
+    public static final int skip = intFourcc("skip");
 
 }
