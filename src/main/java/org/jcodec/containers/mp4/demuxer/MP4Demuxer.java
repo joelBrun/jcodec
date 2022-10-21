@@ -179,6 +179,7 @@ public class MP4Demuxer implements Demuxer {
     @UsedViaReflection
     public static int probe(final ByteBuffer b) {
         ByteBuffer fork = b.duplicate();
+        System.out.printf("MP4demuxer probe :\n");
         int success = 0;
         int total = 0;
         while (fork.remaining() >= 8) {
@@ -194,11 +195,30 @@ public class MP4Demuxer implements Demuxer {
                     || fcc == wide || fcc == skip && total > 1)
                 success++;
             total++;
+            /////
+            if (fcc == ftyp && len < 64)
+                System.out.printf("\t fcc == ftyp && len < 64 \n");
+            else if (fcc == moov && len < 100 * 1024 * 1024)
+                System.out.printf("\t fcc == moov && len < 100 * 1024 * 1024 \n");
+            else if (fcc == free)
+                System.out.printf("\t fcc == free \n");
+            else if (fcc == mdat)
+                System.out.printf("\t fcc == mdat \n");
+            else if (fcc == wide)
+                System.out.printf("\t fcc == wide \n");
+            else if (fcc == skip && total > 1)
+                System.out.printf("\t fcc == skip && total > 1 \n");
+            else
+                System.out.printf(" x ");
+            System.out.printf(" - ");
+            System.out.printf(" success: %d / total: %d \n", success, total);
+            ////
             if (len >= Integer.MAX_VALUE)
                 break;
             NIOUtils.skip(fork, (int) (len - hdrLen));
         }
-
+        System.out.printf("MP4demuxer probe success : %d \n", success);
+        System.out.printf("MP4demuxer probe total   : %s \n", total);
         return total == 0 ? 0 : success * 100 / total;
     }
 

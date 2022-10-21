@@ -7,7 +7,7 @@
 	<name>JCodec</name>
 	<url>http://jcodec.org</url>
 	<packaging>jar</packaging>
-	<version>0.2.6-SNAPSHOT</version>
+	<version>0.2.8-rc2-debug-beta</version>
 	<description>Pure Java implementation of video/audio codecs and formats</description>
 	<licenses>
 		<license>
@@ -90,8 +90,8 @@
 				<version>3.3</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
